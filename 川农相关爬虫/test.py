@@ -1,8 +1,6 @@
 import requests
-import re
 from lxml import etree
 from bs4 import BeautifulSoup
-import prettytable as pt
 
 session = requests.Session()
 headers = {
@@ -30,7 +28,10 @@ def log_sicau(id, pwd):
         session.post(post_url, data=data, timeout=5, headers=headers)
         data = session.get('http://jiaowu.sicau.edu.cn/xuesheng/bangong/main/index1.asp', timeout=5)
         data.encoding = 'gb2312'
-
+        soup = BeautifulSoup(data.text, features='html5lib')
+        info = soup.find_all('font', {"color": "#339999"})
+        for i in info:
+            print(i.string)
     except:
         print('密码错误')
 
