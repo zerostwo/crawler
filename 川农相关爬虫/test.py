@@ -36,6 +36,6 @@ def log_sicau(id, pwd):
         print('密码错误')
 
 
-id = '201702420'
-pwd = '981211'
+id = '201708490'
+pwd = '123456'
 log_sicau(id, pwd)
