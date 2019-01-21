@@ -1,6 +1,7 @@
 import requests
 from lxml import etree
 from bs4 import BeautifulSoup
+from requests import HTTPError
 
 session = requests.Session()
 headers = {
@@ -15,27 +16,22 @@ def get_sign():
     return seletor.xpath("//input[@name='sign']/@value")
 
 
-def log_sicau(id, pwd):
-    data = {
-        'user': id,
-        'pwd': pwd,
-        'lb': 'S',
-        'submit': '',
-        'sign': get_sign()
-    }
+def log_sicau(student_id, password):
+    data = {'user': student_id, 'pwd': password, 'lb': 'S', 'submit': '', 'sign': get_sign()}
     try:
         post_url = 'http://jiaowu.sicau.edu.cn/jiaoshi/bangong/check.asp'
         session.post(post_url, data=data, timeout=5, headers=headers)
         data = session.get('http://jiaowu.sicau.edu.cn/xuesheng/bangong/main/index1.asp', timeout=5)
-        data.encoding = 'gb2312'
-        soup = BeautifulSoup(data.text, features='html5lib')
-        info = soup.find_all('font', {"color": "#339999"})
-        for i in info:
-            print(i.string)
-    except:
-        print('密码错误')
+    except HTTPError as e:
+        print(e)
+    data.encoding = 'gb2312'
+    soup = BeautifulSoup(data.text, features='html5lib')
+    info = soup.find_all('font', {"color": "#339999"})
+    for i in info:
+        print(i.string)
 
 
-id = '201708490'
-pwd = '123456'
-log_sicau(id, pwd)
+if __name__ == '__main__':
+    student_id = '201708490'
+    password = '123456'
+    log_sicau(student_id, password)
