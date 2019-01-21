@@ -3,11 +3,22 @@
 
 #### 初见网络爬虫
 
-##### 安装BeatifulSoup
+##### BeautifulSoup
 
 ```bash
-$ pip install beatifulsoup4
+$ pip install beautifulsoup4
 ```
+
+`BeautifulSoup`里有两个最常用的函数：
+- `find(tag, attributes, recursive, text, limit, keywords)`
+- `findAll(tag, atttibutes, recursive, text, keywords)`
+
+其中：
+- `tag`: HTML文档中的标签；
+- `attributes`: 这是一个Python字典封装一个标签的若干属性和对应的属性值；
+- `recursive`: 递归参数是指的摘取HTML结构中多少层信息，是个布尔变量，`True`代表所有，`False`代表第一层；
+- `text`: 文本参数，根据标签内容去匹配；
+- `limit`: 范围限制参数，抓取前几项，默认为1。
 
 ##### 可靠的网络连接
 
