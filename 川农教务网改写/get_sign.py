@@ -72,11 +72,6 @@ class Inquire(GetStart):
             grade.append(intermediate)
         return grade
 
-    def course_selection_or_withdrawal(self):
-        url = "http://jiaowu.sicau.edu.cn/xuesheng/gongxuan/gongxuan/bxq.asp"
-        soup = self.get_soup(url)
-        return soup.prettify()
-
 
 if __name__ == '__main__':
     a = Inquire()
